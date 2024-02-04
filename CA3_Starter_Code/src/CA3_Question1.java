@@ -7,16 +7,6 @@ import java.util.Scanner;
  */
 public class CA3_Question1
 {
-
-
-    static void drivewayPop(Stack<Integer> driveway){
-        driveway.pop();
-    }
-
-    static void streetPop(Stack<Integer> street){
-        street.pop();
-    }
-
     public static void runSimulation()
     {
         int license;
@@ -33,12 +23,30 @@ public class CA3_Question1
             if(license > 0){
                 driveway.push(license);
                 System.out.println(driveway);
-            } else if (license < 0) {
-                System.out.println(driveway.search(license));
-                System.out.println(driveway);
-            } else if (license == 0){
+            } else if (license == 0) {
                 System.out.println(driveway);
                 break;
+            } else{
+                license = (license * -1);
+                if(driveway.peek()==license){
+//                    street.push(license);
+                    driveway.pop();
+                    System.out.println("Street1: " + street.toString());
+                }
+                else{
+                    while (driveway.peek() != license){
+                        street.push(driveway.peek());
+                        driveway.pop();
+                        System.out.println("Street2: " + street.toString());
+                    }
+                    while (!street.isEmpty()){
+                        driveway.push(street.peek());
+                        street.pop();
+                        System.out.println("Street3: " + street.toString());
+                    }
+                }
+                System.out.println(driveway);
+                System.out.println(street);
             }
 
         } while (license != 0);
