@@ -2,8 +2,8 @@ import java.util.Scanner;
 import java.util.Stack;
 
 /**
- *  Name:
- *  Class Group:
+ *  Name: Liza Pavlovas
+ *  Class Group: GD2A
  */
 public class CA3_Question2
 {
@@ -12,7 +12,7 @@ public class CA3_Question2
 
      */
     public static int[][]  floodFillStart() {
-        Scanner kb = new Scanner(System.in);
+
         int[][] arr = new int[10][10];
         for (int x = 0; x < 10; x++)
         {
@@ -44,6 +44,7 @@ public class CA3_Question2
 
     public static void start()
     {
+//        Scanner kb = new Scanner(System.in);
        int[][] arr = floodFillStart();
     }
     public static void main(String[] args) {

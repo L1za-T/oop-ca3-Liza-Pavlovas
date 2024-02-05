@@ -1,7 +1,7 @@
 import java.io.FileNotFoundException;
 /**
- *  Name:
- *  Class Group:
+ *  Name: Liza Pavlovas
+ *  Class Group: GD2A
  */
 
 public class CA3_Question3

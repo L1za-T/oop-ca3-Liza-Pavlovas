@@ -3,16 +3,27 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Stack;
 /**
- *  Name:
- *  Class Group:
+ *  Name: Liza Pavlovas
+ *  Class Group: GD2A
  */
 public class CA3_Question4 {
 
     /*
         filename: name of the file to test.
      */
+    public static Stack<String> taglist =new Stack<>();
+
     public static boolean validate(String filename) throws FileNotFoundException
     {
+        File test = new File(filename);
+        Scanner fileReader = new Scanner(filename);
+        int x = 0;
+        while (fileReader.hasNext()){
+            String read = fileReader.next();
+            String[] tags = read.split(" ");
+            taglist.push(tags[x]);
+            x = x+1;
+        }
         return false;
     }
 
@@ -21,9 +32,8 @@ public class CA3_Question4 {
          they are valid.
          tags_valid.txt should return true;
          tags_invalid.txt should output as invalid;
-
-
      */
+
     public static void main(String[] args) throws FileNotFoundException {
         String[] files = {"tags_valid.txt", "tags_invalid.txt"};
         for(String fName: files) {
@@ -33,6 +43,7 @@ public class CA3_Question4 {
             } else {
                 System.out.println("This file is invalid");
             }
+            System.out.println(taglist);
         }
     }
 }
