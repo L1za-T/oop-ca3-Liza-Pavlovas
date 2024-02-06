@@ -11,18 +11,21 @@ public class CA3_Question4 {
     /*
         filename: name of the file to test.
      */
-    public static Stack<String> taglist =new Stack<>();
+    public static Stack<String> openTags = new Stack<>();
+    public static Stack<String> closeTags = new Stack<>();
 
     public static boolean validate(String filename) throws FileNotFoundException
     {
-        File test = new File(filename);
-        Scanner fileReader = new Scanner(filename);
-        int x = 0;
+        Scanner fileReader = new Scanner(new File(filename));
         while (fileReader.hasNext()){
             String read = fileReader.next();
-            String[] tags = read.split(" ");
-            taglist.push(tags[x]);
-            x = x+1;
+            if(!read.contains("/")){
+                openTags.push(read);
+            }
+            else{
+                closeTags.push(read);
+            }
+
         }
         return false;
     }
@@ -43,7 +46,8 @@ public class CA3_Question4 {
             } else {
                 System.out.println("This file is invalid");
             }
-            System.out.println(taglist);
+            System.out.println(openTags);
+            System.out.println(closeTags);
         }
     }
 }
