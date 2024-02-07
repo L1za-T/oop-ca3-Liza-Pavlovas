@@ -28,26 +28,27 @@ public class CA3_Question1
                 break;
             } else{
                 license = (license * -1);
-                if(driveway.peek()==license){
-//                    street.push(license);
-                    driveway.pop();
-                    System.out.println("Street1: " + street.toString());
-                }
-                else{
-                    while (driveway.peek() != license){
-                        street.push(driveway.peek());
-                        driveway.pop();
-                        System.out.println("Street2: " + street.toString());
-                    }
+                
+                boolean done = false;
+                    do{
+                        if(driveway.peek()==license){
+                            driveway.pop();
+                            done = true;
+                        }
+                        else
+                        {
+                        street.push(driveway.pop());
+
+                        }
+                    }while (!done);
                     while (!street.isEmpty()){
                         driveway.push(street.peek());
                         street.pop();
-                        System.out.println("Street3: " + street.toString());
                     }
                 }
                 System.out.println(driveway);
                 System.out.println(street);
-            }
+
 
         } while (license != 0);
 
