@@ -37,8 +37,7 @@ public class CA3_Question1
                         }
                         else
                         {
-                        street.push(driveway.pop());
-
+                            street.push(driveway.pop());
                         }
                     }while (!done);
                     while (!street.isEmpty()){

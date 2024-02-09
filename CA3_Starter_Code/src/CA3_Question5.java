@@ -36,10 +36,10 @@ public class CA3_Question5
         do{
             userInputs = kbInput.nextLine();
 
-           if(userInputs.contains("takeoff Flight-")){
+           if(userInputs.contains("takeoff")){
                take_off.add(userInputs);
                System.out.println(userInputs + " is queued");
-           } else if (userInputs.contains("land Flight-")) {
+           } else if (userInputs.contains("land")) {
                landing.add(userInputs);
                System.out.println(userInputs + " is queued");
            } else if (userInputs.contains("next")) {
