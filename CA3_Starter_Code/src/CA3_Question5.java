@@ -1,72 +1,55 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
-import java.util.Stack;
 
 /**
- *  Name:
- *  Class Group:
+ *  Name: Liza Pavlovas
+ *  Class Group: GD2A
  */
 
 public class CA3_Question5
 {
-    public static Stack<String> take_off = new Stack<>();
-    public static Stack<String> landing = new Stack<>();
-    public static String planeInputs;
+    public static Queue<String> take_off = new LinkedList<>();
+    public static Queue<String> landing = new LinkedList<>();
+    public static String userInputs;
 
     public static void runSimulation(){
         String currentPlane;
-        int queueSize = (take_off.size() + landing.size());
-        for (int i = queueSize; i !=0; i--) {
 
-            if (!landing.empty()) {
-                currentPlane = landing.pop();
+
+            if (!landing.isEmpty()) {
+                currentPlane = landing.remove();
                 System.out.println(currentPlane + " landing.");
             }
             else{
-                System.out.println(take_off);
-                currentPlane = take_off.pop();
+                currentPlane = take_off.remove();
                 System.out.println(currentPlane + " is taking off.");
             }
-        }
     }
-
 
     public static void main(String[] args)
     {
         Scanner kbInput = new Scanner(System.in);
 
         boolean exit = false;
-        System.out.println("Please choose to queue flights for landing or takeoff, run the simulation, or exit.");
+        System.out.println("Please queue flights for landing or takeoff, run the simulation, or exit.");
         do{
-            System.out.printf("%s %n %s %n %s %n %s %n", "1: Queue for landing.", "2: Queue for takeoff.", "3: Run simulation.", "4: Exit.");
-            int menuChoice = kbInput.nextInt();
-            planeInputs = "Not Zero";
-            switch (menuChoice){
-                case 1:
-                    System.out.println("Enter flight number to land. Enter 0 to return to the menu.");
-                    while (!planeInputs.equals("0")){
-                        planeInputs = kbInput.nextLine();
-                        if(!planeInputs.equals("0")){
-                            landing.push(planeInputs);
-                        }
-                    }
-                    break;
-                case 2:
-                    System.out.println("Enter flight number to take off. Enter 0 to return to the menu.");
-                    while (!planeInputs.equals("0")) {
-                        planeInputs = kbInput.nextLine();
-                        if (!planeInputs.equals("0")) {
-                            take_off.push(planeInputs);
-                        }
-                    }
-                    break;
-                case 3:
-                    runSimulation();
-                    break;
-                case 4:
-                    System.out.println("Exiting software.");
-                    exit = true;
-                    break;
-            }
+            userInputs = kbInput.nextLine();
+
+           if(userInputs.contains("takeoff Flight-")){
+               take_off.add(userInputs);
+               System.out.println(userInputs + " is queued");
+           } else if (userInputs.contains("land Flight-")) {
+               landing.add(userInputs);
+               System.out.println(userInputs + " is queued");
+           } else if (userInputs.contains("next")) {
+               runSimulation();
+           }else if (userInputs.contains("exit")) {
+                exit = true;
+           }
+           else {
+               System.out.println("Invalid input, please try again.");
+           }
         }while (!exit);
     }
 }

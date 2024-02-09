@@ -28,7 +28,7 @@ public class CA3_Question1
                 break;
             } else{
                 license = (license * -1);
-                
+
                 boolean done = false;
                     do{
                         if(driveway.peek()==license){

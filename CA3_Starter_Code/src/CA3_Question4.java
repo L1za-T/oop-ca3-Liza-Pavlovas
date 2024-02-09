@@ -11,8 +11,7 @@ public class CA3_Question4 {
     /*
         filename: name of the file to test.
      */
-    public static Stack<String> openTags = new Stack<>();
-    public static Stack<String> closeTags = new Stack<>();
+    public static Stack<String> tags = new Stack<>();
 
     public static boolean validate(String filename) throws FileNotFoundException
     {
@@ -20,10 +19,16 @@ public class CA3_Question4 {
         while (fileReader.hasNext()){
             String read = fileReader.next();
             if(!read.contains("/")){
-                openTags.push(read);
+                tags.push(read);
             }
             else{
-                closeTags.push(read);
+                String top = tags.pop();
+//                System.out.println(top.substring(1));
+//                System.out.println(tags.peek());
+                if (tags.peek().equals(top.substring(1))){
+                    return true;
+                }
+
             }
 
         }
@@ -46,8 +51,8 @@ public class CA3_Question4 {
             } else {
                 System.out.println("This file is invalid");
             }
-            System.out.println(openTags);
-            System.out.println(closeTags);
+            System.out.println(tags);
+
         }
     }
 }
