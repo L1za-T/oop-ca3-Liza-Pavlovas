@@ -38,7 +38,7 @@ public class CA3_Question8 {
             } else if (numCheck.toString().equals("(")) {
                 operators.push(numCheck.toString());
             }
-                else if ((!numCheck.toString().equals ('(')) ||(!numCheck.toString().equals(")"))|| (!Character.isDigit(numCheck)) ){
+                else if ((!numCheck.toString().equals ("*")) ||(!numCheck.toString().equals("/"))|| (!Character.isDigit(numCheck)) ){
 
                     if(!operators.isEmpty()) {
                         while (operators.peek().equals("*") || operators.peek().equals("/")) {
