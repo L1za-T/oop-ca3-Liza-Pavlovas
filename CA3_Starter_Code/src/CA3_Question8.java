@@ -7,7 +7,6 @@ import java.util.Stack;
  */
 public class CA3_Question8 {
 
-
     public static Stack<Double> numbers = new Stack<>();
     public static Stack<String> operators = new Stack<>();
     /*
@@ -17,17 +16,29 @@ public class CA3_Question8 {
 
     public static double calc(String equation){
         for(int i = 0; i < equation.length(); i++){
-            char checkChar = equation.charAt(i);
             Character numCheck = equation.charAt(i);
+            String digitNumber;
 
-            if(numCheck.isDigit(equation.charAt(i))){
-                numbers.push(Double.parseDouble(numCheck.toString()));
 
-            } else if (checkChar == '(') {
+            if(Character.isDigit(equation.charAt(i))){
+                digitNumber = numCheck.toString();
+                for(int j = i+1; j < equation.length(); j++)
+                {
+                    if (!Character.isDigit(equation.charAt(j)))
+                    {
+                        i += (j-i-1);
+                        break;
+                    }
+                    else
+                    {
+                        digitNumber += equation.charAt(j);
+                    }
+                }
+                numbers.push(Double.parseDouble(digitNumber));
+            } else if (numCheck.toString().equals("(")) {
                 operators.push(numCheck.toString());
-
-            } /*else if (checkChar == '*' || checkChar == '/' || checkChar == '+' || checkChar == '-') */
-                else if ((checkChar != '(') || (checkChar != ')') || (!numCheck.isDigit(checkChar)) ){
+            }
+                else if ((!numCheck.toString().equals ('(')) ||(!numCheck.toString().equals(")"))|| (!Character.isDigit(numCheck)) ){
 
                     if(!operators.isEmpty()) {
                         while (operators.peek().equals("*") || operators.peek().equals("/")) {
@@ -37,8 +48,8 @@ public class CA3_Question8 {
                     }
                 operators.push(numCheck.toString());
 
-            } else if (checkChar == ')') {
-                while (!operators.isEmpty()&&!operators.peek().equals("(")){
+            } else if (numCheck.toString().equals( ")")) {
+                while (!operators.isEmpty() && !operators.peek().equals("(")){
                     evaluateTop();
                 }
                 operators.pop();
