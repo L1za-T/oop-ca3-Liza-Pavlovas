@@ -29,22 +29,18 @@ public class CA3_Question8 {
             } /*else if (checkChar == '*' || checkChar == '/' || checkChar == '+' || checkChar == '-') */
                 else if ((checkChar != '(') || (checkChar != ')') || (!numCheck.isDigit(checkChar)) ){
 
-                System.out.println(numbers);
-                System.out.println(operators);
+                    if(!operators.isEmpty()) {
+                        while (operators.peek().equals("*") || operators.peek().equals("/")) {
 
+                            evaluateTop();
+                        }
+                    }
                 operators.push(numCheck.toString());
 
-                while (operators.peek().charAt(0) == '*' || operators.peek().charAt(0) == '/'){
-
-                    evaluateTop();
-                }
-
-                operators.push(numCheck.toString());
             } else if (checkChar == ')') {
-                while (!operators.peek().equals("(")){
+                while (!operators.isEmpty()&&!operators.peek().equals("(")){
                     evaluateTop();
                 }
-
                 operators.pop();
             }
         }
@@ -52,7 +48,7 @@ public class CA3_Question8 {
             evaluateTop();
         }
 
-        return result;
+        return result=numbers.peek();
     }
 
     public static void evaluateTop(){
@@ -62,15 +58,14 @@ public class CA3_Question8 {
         double y = numbers.pop();
 
         String operator = operators.pop();
-        System.out.println("Wave");
 
-        if (operator.trim().equals("*")||operator.trim().equalsIgnoreCase("x")){
+        if (operator.equals("*")||operator.equalsIgnoreCase("x")){
             number = y*x;
-        } else if (operator.trim().equals("/")) {
+        } else if (operator.equals("/")) {
             number = y/x;
-        } else if (operator.trim().equals("+")) {
+        } else if (operator.equals("+")) {
             number = y+x;
-        } else if (operator.trim().equals("-")) {
+        } else if (operator.equals("-")) {
             number = y-x;
         }
         numbers.push(number);
@@ -81,7 +76,6 @@ public class CA3_Question8 {
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter equation");
         equation = in.nextLine().trim();
-
         System.out.println("The result is: " + calc(equation));
     }
 }
