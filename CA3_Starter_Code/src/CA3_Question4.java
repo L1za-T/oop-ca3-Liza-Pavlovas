@@ -23,14 +23,10 @@ public class CA3_Question4 {
             }
             else{
                 String top = tags.pop();
-//                System.out.println(top.substring(1));
-//                System.out.println(tags.peek());
-                if (tags.peek().equals(top.substring(1))){
-                    return true;
-                }
-
+                    if (tags.isEmpty() && top.substring(1).equals(read.substring(2))) {
+                        return true;
+                    }
             }
-
         }
         return false;
     }
@@ -43,7 +39,7 @@ public class CA3_Question4 {
      */
 
     public static void main(String[] args) throws FileNotFoundException {
-        String[] files = {"tags_valid.txt", "tags_invalid.txt"};
+        String[] files = {"CA3_Starter_Code/tags_valid.txt", "CA3_Starter_Code/tags_invalid.txt"};
         for(String fName: files) {
             System.out.print(fName +": ");
             if (validate(fName)) {
@@ -51,7 +47,7 @@ public class CA3_Question4 {
             } else {
                 System.out.println("This file is invalid");
             }
-            System.out.println(tags);
+//            System.out.println(tags);
 
         }
     }
