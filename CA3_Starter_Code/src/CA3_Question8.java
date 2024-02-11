@@ -19,12 +19,16 @@ public class CA3_Question8 {
             Character numCheck = equation.charAt(i);
             String digitNumber;
 
-
-            if(Character.isDigit(equation.charAt(i))){
+            if(Character.isDigit(numCheck)){
                 digitNumber = numCheck.toString();
-                for(int j = i+1; j < equation.length(); j++)
+                for(int j = i+1; true; j++)
                 {
-                    if (!Character.isDigit(equation.charAt(j)))
+                    if (j == equation.length())
+                    {
+                        i += (j-i-1);
+                        break;
+                    }
+                    else if (!Character.isDigit(equation.charAt(j)))
                     {
                         i += (j-i-1);
                         break;
@@ -38,7 +42,7 @@ public class CA3_Question8 {
             } else if (numCheck.toString().equals("(")) {
                 operators.push(numCheck.toString());
             }
-                else if ((!numCheck.toString().equals ("*")) ||(!numCheck.toString().equals("/"))|| (!Character.isDigit(numCheck)) ){
+                else if ((numCheck.toString().equals ("*")) ||(numCheck.toString().equals("/"))|| (!Character.isDigit(numCheck)) ){
 
                     if(!operators.isEmpty()) {
                         while (operators.peek().equals("*") || operators.peek().equals("/")) {
