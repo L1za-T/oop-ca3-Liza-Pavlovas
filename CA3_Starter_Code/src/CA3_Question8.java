@@ -13,47 +13,55 @@ public class CA3_Question8 {
         Reads in an equation from the user
      */
     public static double result;
+    public static String digitNumber;
 
     public static double calc(String equation){
-        for(int i = 0; i < equation.length(); i++){
-            Character numCheck = equation.charAt(i);
-            String digitNumber;
+        for(int i = equation.length()-1; i >= 0; i--){
+            Character checkChar = equation.charAt(i);
 
-            if(Character.isDigit(numCheck)){
-                digitNumber = numCheck.toString();
-                for(int j = i+1; true; j++)
+            if(Character.isDigit(checkChar)){
+                digitNumber = checkChar.toString();
+                for(int j = i-1; true; j--)
                 {
-                    if (j == equation.length())
+                    if (j < 0)
                     {
-                        i += (j-i-1);
+                        i -= (i-j-1);
                         break;
                     }
                     else if (!Character.isDigit(equation.charAt(j)))
                     {
-                        i += (j-i-1);
+                        i -= (i-j-1);
                         break;
                     }
                     else
                     {
-                        digitNumber += equation.charAt(j);
+                        digitNumber = equation.charAt(j) + digitNumber;
                     }
                 }
                 numbers.push(Double.parseDouble(digitNumber));
-            } else if (numCheck.toString().equals("(")) {
-                operators.push(numCheck.toString());
+
+
+            } else if (checkChar.equals(')')) {
+                operators.push(checkChar.toString());
+
             }
-                else if ((numCheck.toString().equals ("*")) ||(numCheck.toString().equals("/"))|| (!Character.isDigit(numCheck)) ){
+            else if ((checkChar != '(') || (checkChar != ')') || (!Character.isDigit(checkChar)) ){
 
-                    if(!operators.isEmpty()) {
-                        while (operators.peek().equals("*") || operators.peek().equals("/")) {
-
+                if ((checkChar != '*') && (checkChar != '/'))
+                {
+                    while(!operators.isEmpty()) {
+                        if (operators.peek().equals("*") || operators.peek().equals("/")) {
                             evaluateTop();
                         }
+                        else{
+                            break;
+                        }
                     }
-                operators.push(numCheck.toString());
+                }
+                operators.push(checkChar.toString());
 
-            } else if (numCheck.toString().equals( ")")) {
-                while (!operators.isEmpty() && !operators.peek().equals("(")){
+            } else if (checkChar.equals('(')) {
+                while (!operators.isEmpty()){
                     evaluateTop();
                 }
                 operators.pop();
@@ -75,13 +83,13 @@ public class CA3_Question8 {
         String operator = operators.pop();
 
         if (operator.equals("*")||operator.equalsIgnoreCase("x")){
-            number = y*x;
+            number = x*y;
         } else if (operator.equals("/")) {
-            number = y/x;
+            number = x/y;
         } else if (operator.equals("+")) {
-            number = y+x;
+            number = x+y;
         } else if (operator.equals("-")) {
-            number = y-x;
+            number = x-y;
         }
         numbers.push(number);
     }
